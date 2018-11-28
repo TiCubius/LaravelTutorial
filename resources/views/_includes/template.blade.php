@@ -10,8 +10,8 @@
 
         <title>Hello, world!</title>
     </head>
-    <body>
-        <div class="container-fluid">
+    <body style="height: 100vh">
+        <div class="container-fluid h-100">
             @yield("content")
         </div>
     </body>

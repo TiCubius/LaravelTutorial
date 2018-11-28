@@ -1,8 +1,9 @@
 @extends("_includes.template")
 
 @section("content")
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column justify-content-center align-items-center h-100">
         <h4>S'enregistrer</h4>
+
         <form action="/users" method="POST">
 
             {{ csrf_field() }}
