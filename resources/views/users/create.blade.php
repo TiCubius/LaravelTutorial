@@ -10,7 +10,7 @@
 
             <div class="form-group">
                 <label for="firstname">Firstname</label>
-                <input id="exampleInputEmail1" class="form-control" type="text" name="firstname" placeholder="Firstname">
+                <input id="firstname" class="form-control" type="text" name="firstname" placeholder="Firstname">
             </div>
             <div class="form-group">
                 <label for="lastname">Lastname</label>
@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
+                <label for="email">Email address</label>
                 <input id="email" class="form-control" type="email" name="email" placeholder="Email">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>

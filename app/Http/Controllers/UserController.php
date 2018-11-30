@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -40,7 +43,7 @@ class UserController extends Controller
         $request->validate([
             "firstname" => "required|min:1|max:255",
             "lastname"  => "required|min:1|max:255",
-            "email"     => "required|min:1|max:255|email",
+            "email"     => "required|min:1|max:255|email|unique:users",
             "password"  => "required|min:8|confirmed",
         ]);
 
@@ -103,5 +106,44 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * GET - Affiche le formulaire de connexion
+     * @return View
+     */
+    public function login(): View
+    {
+        return view("users.login");
+    }
+
+    /**
+     * POST - Vérifie les données soumises
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function doLogin(Request $request): RedirectResponse
+    {
+        $email = $request->input("email");
+        $password = $request->input("password");
+
+        // On cherche l'utilisateur
+        $user = User::where("email", "=", $email)->first();
+        if($user) {
+            // On a trouvé un utilisateur
+            if (Hash::check($password, $user->password)) {
+                // Bon mot de passe
+
+                // On ajoute l'instance de User dans la session
+                Session::put("user", $user);
+
+                // On redirige l'utilisateur
+                return redirect("/");
+            }
+        }
+
+        // Aucun utilisateur trouvé avec ces paramètres
+        return back()->withErrors("Invalid email or password");
     }
 }

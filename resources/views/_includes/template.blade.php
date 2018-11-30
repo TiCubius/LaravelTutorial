@@ -11,7 +11,9 @@
         <title>Hello, world!</title>
     </head>
     <body style="height: 100vh">
+        @include("_includes.navbar")
         <div class="container-fluid h-100">
+            @include("_includes.errors")
             @yield("content")
         </div>
     </body>
