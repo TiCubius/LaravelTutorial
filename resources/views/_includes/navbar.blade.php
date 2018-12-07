@@ -3,7 +3,7 @@
 
     @if(Session::has("user"))
         <div class="links">
-            <a class="mr-3 text-white" href="#"> {{ Session::get("user")->firstname }}</a>
+            <a class="mr-3 text-white" href="{{ route("users.logout") }}"> {{ Session::get("user")->firstname }}</a>
         </div>
     @else
         <div class="links">

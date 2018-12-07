@@ -60,7 +60,7 @@ class UserController extends Controller
             "role_id" => $role->id,
         ]);
 
-        echo "L'utilisateur {$request->email} a été créé";
+        return redirect(route("users.login"));
     }
 
     /**
@@ -145,5 +145,19 @@ class UserController extends Controller
 
         // Aucun utilisateur trouvé avec ces paramètres
         return back()->withErrors("Invalid email or password");
+    }
+
+    /**
+     * GET - Déconnecte l'utilisateur et le redirige sur la page de connexion
+     *
+     * @return RedirectResponse
+     */
+    public function logout(): RedirectResponse
+    {
+        // Supprime l'utilisateur de la session
+        Session::forget("user");
+
+        // Redirige l'utilisateur sur le login
+        return redirect(route("users.login"));
     }
 }
